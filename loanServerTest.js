@@ -10,7 +10,7 @@
 //var chai = require('chai');
 //var mocha = require('mocha');
 //var testCase  = require('nodeunit').testCase;
-var qunit = require('qunit');
+//var qunit = require('qunit');
 
 //var expect = chai.expect; // use the "expect" style
 //var assert = chai.assert; 
@@ -37,10 +37,10 @@ var handler = require('./handlers.js');
 
 test( "CalcLtv test 2", function() {
     var loan = 100000;
-    var value = 30000;
-    var testVal = calcLtv(loan,value);
+    var value = 50000;
+    var testVal = handler.calcLtv(loan,value);
     console.log("The value of testVal is: " + testVal);
-    equal(testVal, 300, "Passed!" );
+    equal(testVal, 200, "Passed!" );
 });
 
 test( "CalcLtv test", function() {

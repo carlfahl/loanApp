@@ -13,7 +13,6 @@ var url = require('url');
 var fs = require('fs');
 var h = require('./handlers.js');
 var sth = require('./static_handlers.js');
-var qunit = require('qunit');
 
 handlers = [];
 res_data = [];

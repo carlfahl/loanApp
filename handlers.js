@@ -9,7 +9,6 @@
 var qs = require('querystring');
 // Use this package for server side validation of user input.
 var val = require('validator');
-var qunit = require('qunit');
 
 var index = 1;
 
