@@ -8,7 +8,9 @@
 
 // Include chai for unit testing.
 //var chai = require('chai');
+//var mocha = require('mocha');
 //var testCase  = require('nodeunit').testCase;
+var qunit = require('qunit');
 
 //var expect = chai.expect; // use the "expect" style
 //var assert = chai.assert; 
@@ -27,8 +29,12 @@ var handler = require('./handlers.js');
 //});
 
 // This test is designed for nodeunit testing framework.
-exports.testCalcLtv = function (test) {
-    var testVal = handler.calcLtv(30000/100000);
-    test.equal(testVal, 30);
-    test.done();
-);
+//exports.testCalcLtv = function (test) {
+//    var testVal = handler.calcLtv(30000/100000);
+//    test.equal(testVal, 30);
+//    test.done();
+//};
+
+test( "CalcLtv test", function() {
+    equal(handler.calcLtv(30000,100000), 30, "Passed!" );
+});

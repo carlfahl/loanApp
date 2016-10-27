@@ -10,7 +10,9 @@ Intall Nodejs - method depends on operating system.
 
 Install node packages
 
-For unit testing install the mocha program.
+For unit testing install the mocha and qunit programs.
+
+npm install -g qunit
 
 npm install -g mocha
 
@@ -41,3 +43,7 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 nodejs loanServer.js
 
 Then point bowser to localhost:8124
+
+#### Run tests
+
+nodejs runtest.js

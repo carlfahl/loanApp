@@ -66,6 +66,14 @@ var showStatus = function (request, response, data, get_params, post_params, par
     var tmp = qs.parse(post_params);
 }
 
+test( "CalcLtv test", function() {
+    var loan = 30000;
+    var value = 100000;
+    var testVal = calcLtv(loan,value);
+    console.log("The value of testVal is: " + testVal);
+    equal(testVal, 30, "Passed!" );
+});
+
 exports.favicon = favicon;
 exports.approval = approval;
 exports.calcLtv = calcLtv;
