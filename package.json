@@ -10,6 +10,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mysql": "^2.11.1",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "validator": "^6.1.0"
   }
 }

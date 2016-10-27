@@ -8,6 +8,7 @@
 
 // Include the needed modules
 var http = require('http');
+var https = require('https');
 var url = require('url');
 var fs = require('fs');
 var h = require('./handlers.js');
@@ -27,7 +28,16 @@ res_data['/jquery-1.11.1.min.js'] = fs.readFileSync('jquery-1.11.1.min.js', enco
 
 // This creates the http server
 //
-var loanServer = http.createServer(loan);
+//var loanServer = http.createServer(loan);
+
+// HTTPS configuration
+var https_options = {
+  key: fs.readFileSync('./server.key'),
+  cert: fs.readFileSync('./server.crt')
+};
+
+// Create an https server.
+var loanServer = https.createServer(https_options, loan);
 
 // Callback function for the http server that processes requests.
 //
