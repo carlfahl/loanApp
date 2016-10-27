@@ -1,0 +1,15 @@
+{
+  "name": "loan_form",
+  "discription": "Simple loan form",
+  "license": "GPL-3.0",
+  "version": "v0.1.0",
+  "Author": {
+    "name": "Carl A. Fahlstrom",
+    "email": "carl@carlfahlstrom.com"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mysql": "^2.11.1",
+    "querystring": "^0.2.0"
+  }
+}

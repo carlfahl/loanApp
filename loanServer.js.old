@@ -1,0 +1,112 @@
+#!/usr/bin/env node
+
+// This program allows pulling data from a http get request.
+// That data is input into a database.  In this case it is 
+// envisioned that you are registoring a specific device to
+// a specific username.  That way when data is sent form the device
+// it can include its device id and then it will be associated with the
+// correct username.  On the otherhand the username can be sent with the data
+// the same way.  This can be changed to whatever data we want to send.
+// It is just sent as plain text on the HTTP GET request.  
+//
+
+// Include the needed modules
+var http = require('http');
+var url = require('url');
+var qs = require('querystring');
+var fs = require('fs');
+var h = require('./handlers.js');
+var sth = require('./static_handlers.js');
+
+handlers = [];
+res_data = [];
+handlers['/favicon.ico'] = h.favicon;
+
+res_data['/style.css'] = fs.readFileSync('style.css', encoding='utf8');
+res_data['/'] = fs.readFileSync('index.html', encoding='utf8');
+res_data['/submitLoan.js'] = fs.readFileSync('submitLoan.js', encoding='utf8');
+
+// This creates the http server
+//
+var loanServer = http.createServer(loan);
+
+// Callback function for the http server that processes requests.
+//
+function loan(request, response) {
+	// This is how to map a function to an event.
+	// As a test try to write the lenght of the get
+	// request to the console.
+	//
+	// the 'data' event only exists for POST data
+	// for GET data, use the length of the URL.
+	//
+	var urlstr = url.parse(request.url);
+	var urlpath = urlstr.pathname;
+	var get_params = urlstr.query;
+	console.log('Got request from: '+urlpath+get_params);
+	console.log(urlpath);
+
+	//var ext = urlpath.slice(urlpath.search("\\.")+1);
+
+	var body = '';
+	var post_params ='';
+
+	// These methods provide for GET method request.
+	//
+	if (urlpath == '/') {
+		handlers[urlpath] = h.sendIndex;
+    		response.writeHead(200, {"Content-Type": "text/html"});
+   		response.end(index_data);
+	}
+
+	if (urlpath == '/style.css') {
+		handlers[urlpath] = h.sendCss;
+		response.writeHead(200, {"Content-Type": "text/css"});
+		response.end(style_data);
+	}
+
+	if (urlpath == '/style.css') {
+		handlers[urlpath] = h.sendCss;
+		response.writeHead(200, {"Content-Type": "text/css"});
+		response.end(style_data);
+	}
+
+	else if (urlpath == '/approve_loan') {
+		handlers[urlpath] = h.approval;
+		console.log("Checking the load status");
+	}
+
+	else if (urlpath == '/check_status') {
+		handlers[urlpath] = h.showStatus;
+	}
+
+	// These methods provide for POST method requests.
+	//
+	request.on('data', function (dataBytes){
+		//console.log("The size of this request is %d bytes.", dataBytes.length);
+		body += dataBytes;
+	});
+
+	request.on('end', function () {
+		post_params = body;
+		//console.log(post_params);
+		handlers[urlpath](request, response, post_params, function ()
+		{
+			//console.log("The handler function completed.");
+		});
+	});
+}
+
+//Set the server to listen on port 8124
+//
+loanServer.listen(8124);
+
+console.log("Started the server");
+
+// Provides for clean shutdown of the server
+process.on('SIGINT', function () {
+	console.log("Shutting down the Server");
+	//sm.stopmysql(connection);
+	process.exit();
+});
+
