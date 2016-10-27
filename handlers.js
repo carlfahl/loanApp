@@ -9,6 +9,7 @@
 var qs = require('querystring');
 // Use this package for server side validation of user input.
 var val = require('validator');
+var qunit = require('qunit');
 
 var index = 1;
 
@@ -65,14 +66,6 @@ var calcLtv = function (loan, value) {
 var showStatus = function (request, response, data, get_params, post_params, params, cbf) {
     var tmp = qs.parse(post_params);
 }
-
-//test( "CalcLtv test", function() {
-//    var loan = 30000;
-//    var value = 100000;
-//    var testVal = calcLtv(loan,value);
-//    console.log("The value of testVal is: " + testVal);
-//    equal(testVal, 30, "Passed!" );
-//});
 
 exports.favicon = favicon;
 exports.approval = approval;

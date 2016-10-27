@@ -35,6 +35,14 @@ var handler = require('./handlers.js');
 //    test.done();
 //};
 
+test( "CalcLtv test 2", function() {
+    var loan = 100000;
+    var value = 30000;
+    var testVal = calcLtv(loan,value);
+    console.log("The value of testVal is: " + testVal);
+    equal(testVal, 300, "Passed!" );
+});
+
 test( "CalcLtv test", function() {
     equal(handler.calcLtv(30000,100000), 30, "Passed!" );
 });
