@@ -27,18 +27,24 @@ function checkLoanApp (loanAmountText, propValueText, SSNText) {
     });
 }
 
-function getLoanStatus(loanID) {
+function getLoanStatus(loanIDText) {
     loanID = loanIDText.value;
 
     $.ajax({
-        url: '/check_loan',
+        url: '/check_status',
         type: 'POST',
         data: {'loanID': loanID}
     }).done(function (data) {
         var results = data.split(",");
-        $("#loanStatus").html("The loan # " + results[1] + "is " + results[0].toLowerCase() + ".");
-        $("#loanStatus").removeClass("goodLoan");
-        $("#loanStatus").addClass("badLoan");
+        $("#loanStatus").html("The loan # " + results[1] + " was " + results[0].toLowerCase() + ".");
+        if (results[0] == "Approved") {
+            $("#loanStatus").removeClass("badLoan");
+            $("#loanStatus").addClass("goodLoan");
+	}
+        else if (results[0] == "Rejected") {
+            $("#loanStatus").removeClass("goodLoan");
+            $("#loanStatus").addClass("badLoan");
+	}
         
     });
 }

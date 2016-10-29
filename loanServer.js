@@ -38,6 +38,7 @@ res_data['/submitLoan.js'] = fs.readFileSync('submitLoan.js', encoding='utf8');
 res_data['/jquery-1.11.1.min.js'] = fs.readFileSync('jquery-1.11.1.min.js', encoding='utf8');
 
 use_db['/approve_loan'] = connection;
+use_db['/check_status'] = connection;
 // This creates the http server
 //
 //var loanServer = http.createServer(loan);

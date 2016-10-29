@@ -79,6 +79,16 @@ var calcLtv = function (loan, value) {
 
 var showStatus = function (request, response, data, get_params, post_params, params, use_db, cbf) {
     var tmp = qs.parse(post_params);
+    sm.selectFromTable(use_db, 'loans', 0, 'loan_status', 'loanID', tmp['loanID'], function (data) {
+	if (data[0]['loan_status'] == 1) {
+            response_st = 'Approved,'+tmp['loanID'];
+        }
+        else {
+            response_st = 'Rejected,'+tmp['loanID'];
+        }
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.end(response_st);
+    });
 }
 
 exports.favicon = favicon;
