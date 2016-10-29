@@ -11,12 +11,23 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var fs = require('fs');
+var mysql = require('mysql');
 var h = require('./handlers.js');
 var sth = require('./static_handlers.js');
+
+var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'loanUser', // Database username
+        password : 'loanApp~!@~!@', // Database password
+        database : 'loanapp'
+});
+
+connection.connect();
 
 handlers = [];
 res_data = [];
 params = [];
+use_db = [];
 handlers['/favicon.ico'] = h.favicon;
 handlers['/approve_loan'] = h.approval;
 handlers['/check_status'] = h.showStatus;
@@ -26,6 +37,7 @@ res_data['/'] = fs.readFileSync('index.html', encoding='utf8');
 res_data['/submitLoan.js'] = fs.readFileSync('submitLoan.js', encoding='utf8');
 res_data['/jquery-1.11.1.min.js'] = fs.readFileSync('jquery-1.11.1.min.js', encoding='utf8');
 
+use_db['/approve_loan'] = connection;
 // This creates the http server
 //
 //var loanServer = http.createServer(loan);
@@ -72,6 +84,11 @@ function loan(request, response) {
                 params[urlpath] = '';
         }
 
+	if (!use_db[urlpath])
+        {
+                use_db[urlpath] = '';
+        }
+
 	if (!handlers[urlpath])
         {
                 if (urlpath.split(".")[1] == "css") handlers[urlpath] = sth.writeStaticCss;
@@ -88,7 +105,7 @@ function loan(request, response) {
 	request.on('end', function () {
 		post_params = body;
 		//console.log(post_params);
-		handlers[urlpath](request, response, res_data[urlpath], get_params, post_params, params, function ()
+		handlers[urlpath](request, response, res_data[urlpath], get_params, post_params, params[urlpath], use_db[urlpath], function ()
 		{
 			//console.log("The handler function completed.");
 		});
@@ -107,5 +124,4 @@ process.on('SIGINT', function () {
 	//sm.stopmysql(connection);
 	process.exit();
 });
-
 

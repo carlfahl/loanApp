@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 
-var favicon = function (request, response, data, get_params, post_params, params, cbf)
+var favicon = function (request, response, data, get_params, post_params, params, use_db, cbf)
 {
 	response.writeHead(200, {'Content-Type': 'text/html'});
 	console.log('This is the favicon');
@@ -14,7 +14,7 @@ var favicon = function (request, response, data, get_params, post_params, params
 	cbf();
 }
 
-var writeStatic = function (request, response, data, get_params, post_params, params, cbf)
+var writeStatic = function (request, response, data, get_params, post_params, params, use_db, cbf)
 {
 	if (params[0] == 'html') response.writeHead(200, {'Content-Type': 'text/html'});
 	if (params[0] == 'css') response.writeHead(200, {'Content-Type': 'text/css'});
@@ -25,7 +25,7 @@ var writeStatic = function (request, response, data, get_params, post_params, pa
 	cbf();
 }
 
-var writeStaticCss = function (request, response, data, get_params, post_params, params, cbf)
+var writeStaticCss = function (request, response, data, get_params, post_params, params, use_db, cbf)
 {
 	response.writeHead(200, {'Content-Type': 'text/css'});
 	response.write(data);
@@ -34,7 +34,7 @@ var writeStaticCss = function (request, response, data, get_params, post_params,
 	cbf();
 }
 
-var writeStaticImage = function (request, response, data, get_params, post_params, params, cbf)
+var writeStaticImage = function (request, response, data, get_params, post_params, params, use_db, cbf)
 {
 	response.writeHead(200, {'Content-Type': 'image/png'});
 	response.write(data);
@@ -45,7 +45,7 @@ var writeStaticImage = function (request, response, data, get_params, post_param
 
 // This function will be used with URLs of type /urlpath?get_params
 //
-var writeStaticAjax = function (request, response, data, get_params, post_params, params, cbf)
+var writeStaticAjax = function (request, response, data, get_params, post_params, params, use_db, cbf)
 {
 	response.writeHead(200, {'Content-Type': 'text/html'});
 	// If file has not already been read

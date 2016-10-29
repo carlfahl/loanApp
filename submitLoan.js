@@ -13,7 +13,7 @@ function checkLoanApp (loanAmountText, propValueText, SSNText) {
         type: 'POST',
         data: {'loanAmount': loanAmount, 'propVal':propValue, 'SSN':SSN}
     }).done(function (data) {
-        results = data.split(",");
+        var results = data.split(",");
         if (results[0] == "Approved") {
             $("#loanResult").html("The loan #" + results[1] + " is approved.");
             $("#loanResult").removeClass("badLoan");
@@ -30,5 +30,15 @@ function checkLoanApp (loanAmountText, propValueText, SSNText) {
 function getLoanStatus(loanID) {
     loanID = loanIDText.value;
 
-    $.ajax("");
+    $.ajax({
+        url: '/check_loan',
+        type: 'POST',
+        data: {'loanID': loanID}
+    }).done(function (data) {
+        var results = data.split(",");
+        $("#loanStatus").html("The loan # " + results[1] + "is " + results[0].toLowerCase() + ".");
+        $("#loanStatus").removeClass("goodLoan");
+        $("#loanStatus").addClass("badLoan");
+        
+    });
 }

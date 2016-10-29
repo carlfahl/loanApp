@@ -16,6 +16,8 @@
 <div id="container">
 
     <form action="" onsubmit="checkLoanApp(this.loanAmount, this.propVal, this.SSN); return false;">
+        <input id="" type="text" name="firstName" required placeholder="First Name" />
+        <input id="" type="text" name="lastName" required placeholder="Last Name" />
         <input id="" type="text" name="loanAmount" required placeholder="Loan Amount" />
         <input id="" type="text" name="propVal" required placeholder="Value of the Property" />
         <input id="" type="text" name="SSN" required placeholder="Social Security Number" />
@@ -25,7 +27,7 @@
     <!-- This div element will contain the results from the AJAX request.  Either loan accepted or rejected. -->
     <div id="loanResult"></div>
 
-    <form action="" onsubmit="getLoanStatus(this.loanID); return false;">
+    <form id="checkform" action="" onsubmit="getLoanStatus(this.loanID); return false;">
         <input id="" type="text" name="loanID" required placeholder="Enter the loan ID" />
         <input type="submit" value="Check Loan Status" />
     </form>
