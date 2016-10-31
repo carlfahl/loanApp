@@ -2,6 +2,24 @@
 // Carl A. Fahlstrom
 //
 
+var Loan = function () {
+    this.amount = 0;
+    this.loan = 0;
+    this.ssn = 0;
+}
+
+Loan.prototype.getAmount = function () {
+    return this.amount;
+}
+
+Loan.prototype.getLoan = function () {
+    return this.loan;
+}
+
+Loan.prototype.getSSN = function () {
+    return this.ssn;
+}
+
 function checkLoanApp (loanAmountText, propValueText, SSNText) {
     loanAmount = loanAmountText.value;
     propValue = propValueText.value;

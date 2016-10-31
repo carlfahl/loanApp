@@ -54,12 +54,14 @@ var approval = function (request, response, data, get_params, post_params, param
         loanStatus = true;
     }
 
-    sm.insertToTable(use_db, 'loans', [0, loan, value, ssn, loanStatus, 'now()'],['int', 'float', 'float', 'int', 'bool', 'function'], function (data) {
-        var loan_id = data[0]['LAST_INSERT_ID()'];
-        response_st += loan_id+","+ssn+","+ltv;
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.end(response_st);
-    });
+    if (val.isNumeric(loan) && val.isNumeric(value) && val.isNumeric(ssn)) {
+        sm.insertToTable(use_db, 'loans', [0, loan, value, ssn, loanStatus, 'now()'],['int', 'float', 'float', 'int', 'bool', 'function'], function (data) {
+            var loan_id = data[0]['LAST_INSERT_ID()'];
+            response_st += loan_id+","+ssn+","+ltv;
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.end(response_st);
+       });
+    }
 
     //var loan_id = index;
 
