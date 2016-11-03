@@ -38,6 +38,11 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 ----------------------------
 
+#### MySQL database setup
+
+create database loanapp;
+create table loans(loanID INT NOT NULL AUTO_INCREMENT, amount FLOAT, value FLOAT, ssn INT, loan_status BOOL, point_time TIMESTAMP, PRIMARY KEY (loanID)); 
+
 #### start server
 
 nodejs loanServer.js
