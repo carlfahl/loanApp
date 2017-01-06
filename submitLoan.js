@@ -20,6 +20,9 @@ Loan.prototype.getSSN = function () {
     return this.ssn;
 }
 
+$("#loanForm").submit(function () {
+});
+
 function checkLoanApp (loanAmountText, propValueText, SSNText) {
     loanAmount = loanAmountText.value;
     propValue = propValueText.value;
