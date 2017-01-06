@@ -5,3 +5,8 @@ node_js:
 
 install: 
   - npm install
+
+git:
+  depth: 3
+
+

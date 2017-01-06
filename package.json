@@ -13,8 +13,8 @@
     "querystring": "^0.2.0",
     "qunit": "^0.9.1",
     "validator": "^6.1.0"
-  }
+  },
   "scripts": {
-    "test": 
+    "test": "node runtest.js"
   }
 }
