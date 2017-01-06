@@ -1,5 +1,9 @@
 # Loan to Value Calculator
 
+### Build Status
+
+[![Build Status](https://travis-ci.org/carlfahl/loanApp.svg?branch=master)](https://travis-ci.org/carlfahl/loanApp)
+
 ### Install Instructions
 
 Clone the repository - git clone <repo path>
