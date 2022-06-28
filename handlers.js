@@ -97,3 +97,5 @@ exports.favicon = favicon;
 exports.approval = approval;
 exports.calcLtv = calcLtv;
 exports.showStatus = showStatus;
+
+module.exports = 
